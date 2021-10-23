@@ -51,7 +51,7 @@ public class InputParser {
             break;
 
         //Multi param is same as one but will need to split further
-        case ADD_CONSTITUENT:
+        case LINK:
             //TODO trim inputs
             String[] splitString = parameterString.split("/", 2);
             for (String param : splitString) {

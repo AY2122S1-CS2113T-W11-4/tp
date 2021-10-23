@@ -25,7 +25,7 @@ class AddDishIngrCommandTest {
         IngredientList.ingredientList.add(new Ingredient("rice", 2.34));
         try {
             commandToTest.execute(inputs);
-            assertEquals(1,DishList.dishList.get(0).getConstituents().size());
+            assertEquals(1,DishList.dishList.get(0).getParts().size());
             //Clear lists
             DishList.clearList();
             IngredientList.clearList();

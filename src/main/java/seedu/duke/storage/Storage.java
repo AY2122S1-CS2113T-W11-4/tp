@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,7 +109,7 @@ public class Storage {
                     for (int i = 3; i < params.length; i++) {
                         int ingredientIndex = IngredientList.find(params[i]);
                         Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
-                        dishToAdd.getConstituents().add(dishComponent);
+                        dishToAdd.getParts().add(dishComponent);
                         dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
                     }
                 }

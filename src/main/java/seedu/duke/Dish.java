@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 public class Dish implements Comparable<Dish> {
     private static final Logger logger = Logger.getLogger("Dish class");
-    private ArrayList<Ingredient> constituents = new ArrayList<>();
+    private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui ui = new Ui();
     private String dishName;
     private double wastage;
-    //Each dish contributes a portion of its wastage to constituent ingredients
+    //Each dish contributes a portion of its wastage to part ingredients
     private double ingredientContribution;
 
     public Dish(String dishName) {
@@ -45,8 +45,8 @@ public class Dish implements Comparable<Dish> {
         return ingredientContribution;
     }
 
-    public ArrayList<Ingredient> getConstituents() {
-        return constituents;
+    public ArrayList<Ingredient> getParts() {
+        return parts;
     }
 
     public void addConstituent(String ingredientName) {
@@ -55,18 +55,18 @@ public class Dish implements Comparable<Dish> {
             ui.printIngrNotExistMsg();
         } else {
             //Subtract the old contribution if it exists
-            for (Ingredient ingredient : constituents) {
+            for (Ingredient ingredient : parts) {
                 ingredient.addDishWaste(-ingredientContribution);
             }
-            constituents.add(IngredientList.ingredientList.get(ingredientIndex));
+            parts.add(IngredientList.ingredientList.get(ingredientIndex));
 
             ui.printAddedConstituentOf(ingredientName, dishName);
 
             //Modify the ingredient contribution to reflect the change
-            ingredientContribution = wastage / constituents.size();
+            ingredientContribution = wastage / parts.size();
 
             //Add new contribution
-            for (Ingredient ingredient : constituents) {
+            for (Ingredient ingredient : parts) {
                 ingredient.addDishWaste(ingredientContribution);
             }
         }
@@ -85,12 +85,12 @@ public class Dish implements Comparable<Dish> {
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
         ui.printWastage(dishName, wastage);
-        if (!constituents.isEmpty()) {
+        if (!parts.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop
-            ingredientContribution = wastage / constituents.size();
-            for (Ingredient ingredient : constituents) {
-                //Change in contribution is change in wastage / num of constituents
-                ingredient.addDishWaste(inputWastage / constituents.size());
+            ingredientContribution = wastage / parts.size();
+            for (Ingredient ingredient : parts) {
+                //Change in contribution is change in wastage / num of parts
+                ingredient.addDishWaste(inputWastage / parts.size());
             }
         }
     }
@@ -98,19 +98,19 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public String toString() {
-        String constituentList = "";
-        if (!constituents.isEmpty()) {
-            for (Ingredient ingredient : constituents) {
-                constituentList = constituentList + "," + ingredient.getIngredientName();
+        String partList = "";
+        if (!parts.isEmpty()) {
+            for (Ingredient ingredient : parts) {
+                partList = partList + "," + ingredient.getIngredientName();
             }
-            constituentList = constituentList.replaceFirst(",", "");
+            partList = partList.replaceFirst(",", "");
         } else {
-            logger.log(Level.INFO, "No constituents present for dish " + dishName);
-            constituentList = "None";
+            logger.log(Level.INFO, "No parts present for dish " + dishName);
+            partList = "None";
         }
         return dishName + System.lineSeparator()
                 + "   Wastage: " + wastage + " kg" + System.lineSeparator()
-                + "   Constituents: " + constituentList;
+                + "   Parts: " + partList;
     }
 
     public String toGraph(double max) {
@@ -131,7 +131,7 @@ public class Dish implements Comparable<Dish> {
     public String formatData() {
         String output = "";
         output = output + dishName + "|" + wastage + "|" + ingredientContribution;
-        for (Ingredient ingredient : constituents) {
+        for (Ingredient ingredient : parts) {
             output = output + "|" + ingredient.getIngredientName();
         }
         return output;

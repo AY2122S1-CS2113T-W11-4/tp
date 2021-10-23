@@ -201,12 +201,10 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String DISH_SORT = LINE_DIVIDER + System.lineSeparator()
-            + "List of Dishes has been sorted." + System.lineSeparator()
-            + LINE_DIVIDER;
+            + "List of Dishes has been sorted." + System.lineSeparator();
 
     private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
-            + "Dish list has been cleared." + System.lineSeparator()
-            + LINE_DIVIDER;
+            + "Dish list has been cleared." + System.lineSeparator();
 
     private static final String INGRNAME_MISSING = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, the ingredient name cannot be blank." + System.lineSeparator()
